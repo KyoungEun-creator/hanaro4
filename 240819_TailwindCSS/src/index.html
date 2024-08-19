@@ -7,6 +7,24 @@
     <link rel="stylesheet" href="../dist/output.css" />
   </head>
   <body>
+    <!-- flex -->
+    <div class="h-36 flex mb-3 flex-row flex-wrap justify-around flex-auto gap-2">
+      <div class="basis-1/2 bg-red-300">111</div>
+      <div class="basis-1/4 bg-blue-300">222</div>
+      <div class="basis-1/4 bg-yellow-300">333</div>
+      <div class="bg-purple-300">444</div>
+      <div class="bg-cyan-300">555</div>
+    </div>
+
+    <!-- grid -->
+    <div class="grid grid-cols-3 gap-x-0 gap-y-3">
+      <div class="w-32 bg-red-300 order-2">111</div>
+      <div class="w-32 bg-blue-300 order-1">222</div>
+      <div class="w-32 bg-yellow-300 order-3">333</div>
+      <div class="w-32 bg-purple-300 order-4">444</div>
+      <div class="w-32 bg-cyan-300 order-5">555</div>
+    </div>
+
     <!-- headless -->
     <div class="m-3 p-3">
       <button class="btn">btn</button>
