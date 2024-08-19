@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>게시판</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH"
+      crossorigin="anonymous"
+    />
+    <style>
+      .form-floating {
+        margin-bottom: 1rem;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-3">
+      <header>
+        <h1 id="x" class="text-center">게시판</h1>
+      </header>
+
+      <section class="row">
+        <div class="col-md-6">
+          <div class="fs-4">게시글 목록</div>
+          <div class="list-group list-group flush">
+            <a href="#" class="list-group-item active">게시판 1</a>
+            <a href="#" class="list-group-item d-flex justify-content-between"
+              >게시판 2
+              <small class="text-muted">홍길동</small>
+            </a>
+            <a href="#" class="list-group-item"
+              >게시판 3
+              <small class="text-muted float-end">김길동</small>
+            </a>
+            <a href="#" class="list-group-item">게시판 4</a>
+          </div>
+        </div>
+
+        <!-- 내용 -->
+        <div class="col-md-6 border py-3">
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">
+              <small class="text-muted">제목</small>
+              <strong class="float-end">게시글 제목...</strong>
+            </li>
+            <li class="list-group-item">
+              <small class="text-muted">작성일자</small>
+              <strong class="float-end">2024-08-19 10:02</strong>
+            </li>
+            <li class="list-group-item">
+              Lorem ipsum, dolor sit amet consectetur adipisicing elit. Culpa necessitatibus iusto
+              maiores libero tenetur commodi eveniet est numquam voluptas non nihil magni
+              reprehenderit, enim deleniti ratione aut aperiam rerum voluptatibus sit asperiores!
+              Enim incidunt ut, numquam provident ullam et voluptatibus rerum eligendi neque animi
+              explicabo quam officia itaque totam nemo quo voluptatem dolorem quas nesciunt cumque
+              dolor odio voluptatum. Reprehenderit voluptas excepturi magnam, sequi molestias beatae
+              sapiente nobis repudiandae doloribus dolorum ut blanditiis dolor dolores expedita
+              atque laboriosam magni, cupiditate cumque non iusto. Dolorem, officia velit? Quam,
+              rerum dolorum! Cumque hic ipsa, praesentium assumenda ab corporis optio doloribus non
+              natus.
+            </li>
+          </ul>
+          <div class="list-group-item text-center">
+            <button class="btn btn-danger">삭제하기</button>
+            <!-- red btn -->
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#editingModal">
+              수정하기</button
+            ><!-- blue btn -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Modal -->
+      <div
+        class="modal fade"
+        id="editingModal"
+        tabindex="-1"
+        aria-labelledby="editingModalLabel"
+        aria-hidden="true"
+      >
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h1 class="modal-title fs-5" id="exampleModalLabel">게시글: 홍길동 게시글</h1>
+              <button
+                type="button"
+                class="btn-close"
+                data-bs-dismiss="modal"
+                aria-label="Close"
+              ></button>
+            </div>
+            <div class="modal-body">
+              <!-- title -->
+              <form class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editingTitle"
+                  placeholder="제목"
+                  value="게시글: 홍길동 게시글"
+                />
+                <label for="editingTitle">제목</label>
+              </form>
+
+              <!-- writer -->
+              <form class="form-floating">
+                <input
+                  type="text"
+                  class="form-control"
+                  id="editingWriter"
+                  placeholder="작성자"
+                  value="홍길동"
+                />
+                <label for="editingWriter">작성자</label>
+              </form>
+
+              <!-- comments -->
+              <div class="form-floating">
+                <textarea
+                  class="form-control"
+                  style="height: 200px"
+                  placeholder="Leave a comment here"
+                  id="editingContents"
+                  style="height: 100px"
+                >
+Lorem ipsum dolor sit, amet consectetur adipisicing elit. Laboriosam rerum rem, sint vel aspernatur commodi libero consequuntur quia quae praesentium voluptatibus amet repellat nemo aperiam accusamus placeat? Cumque a animi nulla sequi reprehenderit incidunt sint porro, rerum, magni et, inventore soluta. Repellendus quo repellat deleniti maxime laborum temporibus, corrupti neque? Voluptatibus ipsam nemo aliquam quidem! Amet quisquam, mollitia sunt quidem corrupti sed accusantium. Aperiam architecto autem suscipit voluptas ab, maxime fuga beatae ipsam. Dolores soluta tempora, necessitatibus est voluptatum fugiat perspiciatis consequatur. Culpa libero quam neque aspernatur beatae itaque? Quis sequi at obcaecati odit ullam possimus minus quas earum incidunt aspernatur maxime impedit dolorem ipsa eos ducimus officia dolore aliquam reiciendis facilis, sapiente id delectus illum dignissimos? Unde amet corrupti nulla rerum repudiandae distinctio velit consequatur dignissimos voluptatibus fugit tenetur minima, numquam odio sed commodi minus iste esse sequi. Perferendis alias excepturi est mollitia beatae deserunt blanditiis nobis nam, quo, soluta inventore quam earum molestiae tempore placeat, minima magnam dolore! Dolorum, deserunt mollitia. Alias quaerat nihil, blanditiis, maiores possimus illo et ea aut, ducimus voluptates adipisci numquam. Aperiam rerum quas dolorum, soluta voluptatem natus non laborum eligendi tempora cum iste at laboriosam officiis delectus optio provident quo voluptates! Ratione, maxime!</textarea
+                >
+                <label for="editingContents">Comments</label>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">취소</button>
+              <button type="button" class="btn btn-primary">저장</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+
+    <!-- for dev -->
+    <!-- <script>
+      const editingModal = new bootstrap.Modal("#editingModal", {
+        keyboard: false,
+      });
+      editingModal.show();
+    </script> -->
+  </body>
+</html>
