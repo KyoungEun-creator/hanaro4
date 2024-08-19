@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TailwindCSS Playground</title>
+    <link rel="stylesheet" href="../dist/output.css" />
+  </head>
+  <body>
+    <div
+      class="container mx-auto w-full h-lvh bg-no-repeat bg-cover"
+      style="
+        background-image: url(https://cdn.pixabay.com/photo/2016/05/22/19/48/sunrise-1409090_1280.jpg);
+      "
+    >
+      <h1
+        class="text-4xl text-red-500 hover:text-green-500 font-extrabold underline underline-offset-[10px] bg-primary"
+      >
+        title
+      </h1>
+
+      <ul class="border border-slate-300 p-3 m-3">
+        <li class="text-blue-500 first:bg-red-500 last:bg-blue-500">111</li>
+        <li class="text-green-500 first:bg-red-500 last:bg-blue-500">222</li>
+        <li class="text-gray-500 first:bg-red-500 last:bg-blue-500">333</li>
+        <li class="last:bg-blue-500">444</li>
+      </ul>
+
+      <div class="bg-gradient-to-b from-slate-300 to-blue-500 h-44">BG</div>
+      <div class="bg-gradient-to-r from-slate-300 to-green-500 h-44">BG</div>
+
+      <div class="uppercase text-white">
+        <div class="text-white normal-case">contents</div>
+        Lorem ipsum dolor, sit amet consectetur adipisicing elit. Adipisci repudiandae aliquid
+        pariatur ab voluptas velit blanditiis numquam quod eligendi magni.
+      </div>
+
+      <div class="text-white text-3xl w-full h-10 overflow-hidden text-nowrap text-ellipsis">
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Hic rem, excepturi ea blanditiis
+        molestiae sunt. Sint, adipisci. In quidem facere voluptatem quam ullam voluptates,
+        voluptatibus perferendis maxime, nulla, odio provident. Facilis natus vitae nihil id
+        similique iusto deleniti hic aspernatur.
+      </div>
+
+      <button class="hover:ring-2 ring-pink-500 ring-inset text-white px-3">ring</button>
+
+      <div class="text-center bg-gradient-to-b via-black from-slate-300 to-blue-300 h-44">
+        <button
+          class="w-96 h-[90%] bg-green-200 text-3xl hover:bg-pink-300 transition-all delay-200 duration-700 hover:animate-pulse"
+        >
+          animation1: pulse
+        </button>
+        <button
+          class="mt-5 w-96 h-[90%] bg-blue-200 text-3xl hover:bg-pink-300 transition-all delay-200 duration-700 scale-75 hover:scale-125"
+        >
+          animation2: scale
+        </button>
+        <button
+          class="mt-5 w-96 h-[90%] text-big bg-cyan-500 text-3xltransition-all delay-200 duration-700 translate-x-4 hover:skew-y-3"
+        >
+          animation3: skew
+        </button>
+      </div>
+    </div>
+  </body>
+</html>
