@@ -45,3 +45,10 @@ const weekList2 = [...weekNames2];
 // console.log("🚀 weekList:", weekList);
 
 console.log(`오늘은 ${weekList2[todayWeek2]}요일입니다.`);
+
+// ---------------------------
+`방법3`;
+const weekNames3 = "일월화수목금토";
+const today3 = new Date();
+const todayWeek3 = today3.getDay();
+console.log(`오늘은 ${weekNames3[todayWeek3]}요일입니다.`);
