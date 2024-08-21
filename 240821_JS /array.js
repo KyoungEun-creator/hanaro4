@@ -1,3 +1,5 @@
+```array```;
+
 arr = [1, 2, 3];
 arr.hasOwnProperty("length"); // true
 
