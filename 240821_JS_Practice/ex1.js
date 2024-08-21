@@ -10,6 +10,6 @@
 // 0.9
 // 1
 
-for (let i = 0.1; i < 1; i += 0.1) {
-  console.log(`${String(i.toFixed(1)) === "1.0" ? Math.round(i) : i.toFixed(1)}`);
+for (let i = 0.1; i < 1; i = i + 0.1) {
+  console.log(+i.toFixed(1));
 }
