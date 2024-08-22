@@ -52,3 +52,11 @@ const weekNames3 = "일월화수목금토";
 const today3 = new Date();
 const todayWeek3 = today3.getDay();
 console.log(`오늘은 ${weekNames3[todayWeek3]}요일입니다.`);
+
+// ---------------------------
+`방법4`;
+const weekNames4 = [..."일월화수목금토"];
+console.log("🚀 weekNames4:", weekNames4);
+const today4 = new Date();
+const todayWeek4 = today4.getDay();
+console.log(`오늘은 ${weekNames4[todayWeek4]}요일입니다.`);
