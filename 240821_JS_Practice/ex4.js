@@ -16,9 +16,11 @@ addPoints1(0.34, 0.226); // 0.566
 // 정수부분이 무조건 0이 아니라면?
 
 `방법2`;
+
+// 소수부분 길이 구하는 함수
 function getLength(n) {
-  // 소수부분 길이
-  return String(n).split(".")[1].length;
+  // 소수점이 없는 정수라면?
+  return String(n).split(".")[1]?.length ?? 0;
 }
 
 function addPoints2(a, b) {
@@ -34,6 +36,7 @@ addPoints2(0.143, 10.28); // 10.423
 addPoints2(4000.34, 100.226); // 4100.566
 addPoints2(0.143, -10.28); // -10.137
 addPoints2(4000.34, -100.226); // 3900.114
+addPoints2(0.143, 10); // 10.143
 
 // ---------------------
 
