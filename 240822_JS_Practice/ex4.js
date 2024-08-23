@@ -14,10 +14,10 @@
 const user1 = { name: "Hong", passwd: "xyz", addr: "Seoul" };
 function getValueExceptInitial1(k) {
   const { [k]: val } = user1;
-  console.log(val); // xyz
-  console.log([...val]); // [ 'x', 'y', 'z' ]
+  // console.log(val); // xyz
+  // console.log([...val]); // [ 'x', 'y', 'z' ]
   const [, ...rest] = [...val]; // 맨앞에 하나 빼고 나머지
-  console.log([...rest]); // [ 'y', 'z' ]
+  // console.log([...rest]); // [ 'y', 'z' ]
   return rest.join("");
 }
 getValueExceptInitial1("passwd");
@@ -26,10 +26,29 @@ getValueExceptInitial1("passwd");
 const user2 = { name: "Hong", passwd: "xyz", addr: "Seoul" };
 function getValueExceptInitial2(k) {
   const { [k]: val } = user2;
-
-  const [, ...rest] = val; // 맨앞에 하나 빼고 나머지
+  const [, ...rest] = val; // string은 iterator이기 때문에 가능
   console.log(...rest);
-  //   console.log([...rest]); // [ 'y', 'z' ]
+  return rest.join(" ");
+}
+getValueExceptInitial2("passwd");
+
+`방법3`;
+const user3 = { name: "Hong", passwd: "xyz", addr: "Seoul" };
+function getValueExceptInitial2(k) {
+  const { [k]: val } = user3;
+  const [, ...rest] = typeof val === "string" ? val : [, ""]; // Good
+  console.log(...rest);
+  return rest.join(" ");
+}
+getValueExceptInitial2("passwd");
+
+`방법4`;
+const user4 = { name: "Hong", passwd: "xyz", addr: "Seoul" };
+function getValueExceptInitial2(k) {
+  const { [k]: val } = user4;
+  if (typeof val !== "string") return; // Exellent
+  const [, ...rest] = val;
+  console.log(...rest);
   return rest.join(" ");
 }
 getValueExceptInitial2("passwd");
