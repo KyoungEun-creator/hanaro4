@@ -1,0 +1,25 @@
+{
+  "name": "hanaro4js",
+  "version": "0.0.1",
+  "description": "javascript study samples",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/KyoungEun-creator/hanaro4.git"
+  },
+  "keywords": [
+    "JS"
+  ],
+  "author": "Joe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/KyoungEun-creator/hanaro4/issues"
+  },
+  "homepage": "https://github.com/KyoungEun-creator/hanaro4#readme",
+  "dependencies": {
+    "moment": "^2.30.1"
+  }
+}
