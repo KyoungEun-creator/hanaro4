@@ -9,22 +9,85 @@ const dog = {
   },
   whatsYourName() {
     setTimeout(this.showMyName, 1000);
-    // setTimeout(() => this.showMyName(), 1000);
   }
 };
 
 dog.whatsYourName();
 */
 
-const dog = {
+//---------bind---------
+
+const dog1 = {
   name: "Maxx",
   showMyName() {
-    console.log(`My name is ${this.name}.`);
+    console.log(`a) My name is ${this.name}.`);
   },
   whatsYourName() {
-    setTimeout(this.showMyName, 1000);
-    // setTimeout(() => this.showMyName(), 1000);
+    setTimeout(this.showMyName.bind(this), 1000);
   },
 };
 
-dog.showMyName();
+dog1.whatsYourName();
+
+// ---------arrow function---------
+
+const dog2 = {
+  name: "Maxx",
+  showMyName() {
+    console.log(`b) My name is ${this.name}.`);
+  },
+  whatsYourName() {
+    setTimeout(() => this.showMyName(), 1000);
+  },
+};
+
+dog2.whatsYourName();
+
+// ---------self---------
+
+const dog3 = {
+  name: "Maxx",
+  showMyName() {
+    console.log(`c) My name is ${this.name}.`);
+  },
+  whatsYourName() {
+    const self = this;
+    setTimeout(function () {
+      self.showMyName();
+    }, 1000);
+  },
+};
+
+dog3.whatsYourName();
+
+const dog4 = {
+  name: "Maxx",
+  showMyName() {
+    console.log(`d) My name is ${this.name}.`);
+  },
+  whatsYourName() {
+    const self = this;
+    setTimeout(() => {
+      self.showMyName();
+    }, 1000);
+  },
+};
+
+dog4.whatsYourName();
+
+const dog5 = {
+  name: "Maxx",
+  showMyName() {
+    console.log(`e) My name is ${this.name}.`);
+  },
+
+  whatsYourName() {
+    const self = this;
+    console.log(self);
+    setTimeout(function () {
+      self.showMyName();
+    }, 1000);
+  },
+};
+
+dog5.whatsYourName();
