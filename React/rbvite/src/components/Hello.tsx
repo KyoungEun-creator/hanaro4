@@ -1,19 +1,47 @@
-type TitleProps = { name: string };
-type AgeProps = { age: number };
+import { ReactNode, useState } from 'react';
 
-const Title = ({ name }: TitleProps) => {
-  return <h1>Hello, {name}</h1>;
+type Props = {
+  name: string;
+  age: number;
+  plusCount: () => void;
 };
-const Age = ({ age }: AgeProps) => {
-  return <div style={{ color: 'red' }}>{`(${age})`}</div>;
+type TitleProps = { text: string; name: string };
+
+const Title = ({ text, name }: TitleProps) => {
+  return (
+    <h1>
+      {text} - {name}
+    </h1>
+  );
+};
+const Body = ({ children }: { children: ReactNode }) => {
+  return (
+    <div className='red' style={{ color: 'yellowgreen' }}>
+      {children}
+    </div>
+  );
 };
 
-export default function Hello() {
+export default function Hello({ name, age, plusCount }: Props) {
+  const [myState, setMyState] = useState(0);
+
   return (
     <>
       <div>
-        <Title name={'Jade'} />
-        <Age age={29} />
+        <Title text='Hello' name={name} />
+
+        <Body>
+          This is Hello Component - {myState}-{age}
+        </Body>
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            setMyState(myState + 1);
+            plusCount();
+          }}
+        >
+          Hello
+        </button>
       </div>
     </>
   );

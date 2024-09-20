@@ -5,15 +5,16 @@ import Hello from './components/Hello';
 function App() {
   const [count, setCount] = useState(0);
 
+  const plusCount = () => {
+    setCount(count + 1);
+  };
+
   return (
     <>
-      <h1>[ rbvite ]</h1>
-      <div>
-        <Hello />
-      </div>
+      <Hello name='Jade' age={24} plusCount={plusCount} />
       <div className='card'>
         <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
+          App: count is {count}
         </button>
       </div>
     </>
