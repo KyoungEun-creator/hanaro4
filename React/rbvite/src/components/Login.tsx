@@ -1,4 +1,5 @@
 import { FormEvent, useState } from 'react';
+import LabelInput from './molecules/labelInput';
 
 export default function Login({
   login,
@@ -29,27 +30,18 @@ export default function Login({
         <form onSubmit={signIn} className='mt-3 flex flex-col justify-between'>
           <div className='flex'>
             <div className='mr-3 flex flex-col'>
-              <label htmlFor='id' className='font-bold'>
-                ID
-              </label>
-              <input
-                className='mt-3 rounded border p-3'
-                type='text'
-                id='id'
-                placeholder='id'
+              <LabelInput
+                label='ID'
+                type='number'
                 onChange={(e) => setId(e.currentTarget.value)}
+                classNames='mt-3 rounded border p-3'
               />
             </div>
             <div className='flex flex-col'>
-              <label htmlFor='name' className='font-bold'>
-                Name
-              </label>
-              <input
-                className='mt-3 rounded border p-3'
-                type='text'
-                id='name'
-                placeholder='name'
+              <LabelInput
+                label='Name'
                 onChange={(e) => setName(e.currentTarget.value)}
+                classNames='mt-3 rounded border p-3'
               />
             </div>
           </div>
