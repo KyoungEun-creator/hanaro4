@@ -1,29 +1,25 @@
-import { FormEvent } from 'react';
+import { FormEvent, useState } from 'react';
 
 export default function Login({
   login,
 }: {
   login: (id: number, name: string) => void;
 }) {
+  const [id, setId] = useState('');
+  const [name, setName] = useState('');
+
   const signIn = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const elems = e.currentTarget.elements;
-    const { id, name } = elems as typeof elems & {
-      id: HTMLInputElement;
-      name: HTMLInputElement;
-    };
 
-    if (!id.value) {
+    if (!id) {
       alert('id needed!');
-      id.focus();
       return;
-    } else if (!name.value) {
+    } else if (!name) {
       alert('name needed!');
-      name.focus();
       return;
     }
 
-    login(+id.value, name.value);
+    login(+id, name);
   };
 
   return (
@@ -41,6 +37,7 @@ export default function Login({
                 type='text'
                 id='id'
                 placeholder='id'
+                onChange={(e) => setId(e.currentTarget.value)}
               />
             </div>
             <div className='flex flex-col'>
@@ -52,6 +49,7 @@ export default function Login({
                 type='text'
                 id='name'
                 placeholder='name'
+                onChange={(e) => setName(e.currentTarget.value)}
               />
             </div>
           </div>
