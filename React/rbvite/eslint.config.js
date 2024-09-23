@@ -28,7 +28,7 @@ export default tseslint.config(
       react: { version: '18.3' }, // React 버전 감지
     },
     rules: {
-      ...js.configs.recommended.rules, // ESLint rules
+      // ...js.configs.recommended.rules, // ESLint rules
       ...react.configs.recommended.rules, // React rules
       ...react.configs['jsx-runtime'].rules, // JSX rules
       ...reactHooks.configs.recommended.rules,

@@ -4,6 +4,7 @@ type Props = {
   name: string;
   age: number;
   plusCount: () => void;
+  minusCount: () => void;
 };
 type TitleProps = { text: string; name: string };
 
@@ -22,7 +23,7 @@ const Body = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default function Hello({ name, age, plusCount }: Props) {
+export default function Hello({ name, age, plusCount, minusCount }: Props) {
   const [myState, setMyState] = useState(0);
 
   return (
@@ -34,14 +35,14 @@ export default function Hello({ name, age, plusCount }: Props) {
           This is Hello Component - {myState}-{age}
         </Body>
         <button
-          onClick={(e) => {
-            e.preventDefault();
+          onClick={() => {
             setMyState(myState + 1);
             plusCount();
           }}
         >
           Hello
         </button>
+        <button onClick={() => minusCount()}>minus</button>
       </div>
     </>
   );
