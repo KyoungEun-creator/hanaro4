@@ -1,12 +1,13 @@
 import { FormEvent, useState } from 'react';
-import LabelInput from './molecules/labelInput';
+import LabelInput from './molecules/LabelInput';
+import Button from './atoms/Button';
 
 export default function Login({
   login,
 }: {
   login: (id: number, name: string) => void;
 }) {
-  const [id, setId] = useState('');
+  const [id, setId] = useState(0);
   const [name, setName] = useState('');
 
   const signIn = (e: FormEvent<HTMLFormElement>) => {
@@ -33,7 +34,7 @@ export default function Login({
               <LabelInput
                 label='ID'
                 type='number'
-                onChange={(e) => setId(e.currentTarget.value)}
+                onChange={(e) => setId(+e.currentTarget.value)}
                 classNames='mt-3 rounded border p-3'
               />
             </div>
@@ -45,9 +46,11 @@ export default function Login({
               />
             </div>
           </div>
-          <button className='my-5 rounded bg-green-200 px-3 py-2'>
-            Sign In
-          </button>
+
+          <Button
+            classNames='my-5 rounded bg-green-200 px-3 py-2'
+            text='SignIn'
+          />
         </form>
       </div>
     </>

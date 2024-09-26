@@ -24,11 +24,22 @@ export default function App() {
     setSession({ ...session, loginUser: { id, name } });
   };
 
+  const removeCartItem = (toRemoveId: number) => {
+    session.cart = session.cart.filter(({ id }) => id !== toRemoveId);
+    setSession({ ...session });
+  };
+
   return (
     <>
       <pre>{JSON.stringify(session.loginUser)}</pre>
       <h1>[ 장바구니 ]</h1>
-      <My session={session} logout={logout} login={login} />
+
+      <My
+        session={session}
+        logout={logout}
+        login={login}
+        removeCartItem={removeCartItem}
+      />
     </>
   );
 }
