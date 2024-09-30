@@ -1,4 +1,4 @@
-import { ChangeEvent, FormEvent, useState } from 'react';
+import { FormEvent, useRef } from 'react';
 import LabelInput from './molecules/LabelInput';
 import Button from './atoms/Button';
 
@@ -7,11 +7,13 @@ export default function Login({
 }: {
   login: (id: number, name: string) => void;
 }) {
-  const [id, setId] = useState(0);
-  const [name, setName] = useState('');
+  const idRef = useRef<HTMLInputElement>(null);
+  const nameRef = useRef<HTMLInputElement>(null);
 
   const signIn = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    const id = idRef.current?.value;
+    const name = nameRef.current?.value;
 
     if (!id) {
       alert('id needed!');
@@ -24,10 +26,6 @@ export default function Login({
     login(+id, name);
   };
 
-  const changeName = (e: ChangeEvent<HTMLInputElement>) => {
-    setName(e.currentTarget.value);
-  };
-
   return (
     <>
       <div className='flex w-1/2 flex-col items-center border p-5'>
@@ -38,20 +36,20 @@ export default function Login({
               <LabelInput
                 label='ID'
                 type='number'
-                onChange={(e) => setId(+e.currentTarget.value)}
+                ref={idRef}
                 classNames='mt-3 rounded border p-3'
               />
             </div>
             <div className='flex flex-col'>
-              {/* <LabelInput
-                label='Name'
-                onChange={(e) => setName(e.currentTarget.value)}
-                classNames='mt-3 rounded border p-3'
-              /> */}
-              <LabelInput
-                label='Name'
-                classNames='mt-3 rounded border p-3'
-                onChange={changeName}
+              <label htmlFor='name' className='font-bold'>
+                Name
+              </label>
+              <input
+                className='mt-3 rounded border p-3'
+                type='text'
+                id='name'
+                ref={nameRef}
+                placeholder='name...'
               />
             </div>
           </div>
