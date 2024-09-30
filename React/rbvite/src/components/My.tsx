@@ -12,8 +12,6 @@ type Props = {
 };
 
 export default function My({ session, logout, login, removeCartItem }: Props) {
-  // const [isEditing, setIsEditing] = useState(false);
-
   const removeItem = (id: number) => {
     if (confirm('Are u sure?')) {
       removeCartItem(id);

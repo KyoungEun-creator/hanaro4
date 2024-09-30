@@ -25,8 +25,10 @@ export default function App() {
   };
 
   const removeCartItem = (toRemoveId: number) => {
-    session.cart = session.cart.filter(({ id }) => id !== toRemoveId);
-    setSession({ ...session });
+    setSession({
+      ...session,
+      cart: session.cart.filter(({ id }) => id !== toRemoveId),
+    });
   };
 
   return (

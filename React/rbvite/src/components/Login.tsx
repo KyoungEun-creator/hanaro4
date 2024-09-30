@@ -1,4 +1,4 @@
-import { FormEvent, useState } from 'react';
+import { ChangeEvent, FormEvent, useState } from 'react';
 import LabelInput from './molecules/LabelInput';
 import Button from './atoms/Button';
 
@@ -24,6 +24,10 @@ export default function Login({
     login(+id, name);
   };
 
+  const changeName = (e: ChangeEvent<HTMLInputElement>) => {
+    setName(e.currentTarget.value);
+  };
+
   return (
     <>
       <div className='flex w-1/2 flex-col items-center border p-5'>
@@ -39,10 +43,15 @@ export default function Login({
               />
             </div>
             <div className='flex flex-col'>
-              <LabelInput
+              {/* <LabelInput
                 label='Name'
                 onChange={(e) => setName(e.currentTarget.value)}
                 classNames='mt-3 rounded border p-3'
+              /> */}
+              <LabelInput
+                label='Name'
+                classNames='mt-3 rounded border p-3'
+                onChange={changeName}
               />
             </div>
           </div>
