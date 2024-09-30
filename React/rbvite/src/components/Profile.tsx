@@ -1,20 +1,28 @@
+import { ForwardedRef, forwardRef } from 'react';
 import { Session } from '../App';
-import Button from './atoms/Button';
 
 type Props = {
   session: Session;
   logout: () => void;
 };
 
-export default function Profile({ session, logout }: Props) {
-  return (
-    <>
-      <h1 className='text-5xl'>{session.loginUser?.name} login!</h1>
-      <Button
-        text='Logout'
-        onClick={logout}
-        classNames='my-3 rounded border border-black bg-green-500 px-3 py-2'
-      />
-    </>
-  );
-}
+const Profile = forwardRef(
+  ({ session, logout }: Props, ref: ForwardedRef<HTMLButtonElement>) => {
+    return (
+      <div className='border'>
+        <h1 className='text-5xl'>{session.loginUser?.name} login!</h1>
+        <button
+          onClick={logout}
+          ref={ref}
+          className='my-3 rounded border border-black bg-green-500 px-3 py-2'
+        >
+          Profile_Logout
+        </button>
+      </div>
+    );
+  }
+);
+
+Profile.displayName = 'Profile';
+
+export default Profile;

@@ -1,8 +1,10 @@
 // import { useState } from 'react';
+import { useRef } from 'react';
 import { Session } from '../App';
 import Login from './Login';
 import Profile from './Profile';
 import { FaTrashCan } from 'react-icons/fa6';
+import Button from './atoms/Button';
 
 type Props = {
   session: Session;
@@ -12,6 +14,7 @@ type Props = {
 };
 
 export default function My({ session, logout, login, removeCartItem }: Props) {
+  const logoutButtonRef = useRef<HTMLButtonElement>(null);
   const removeItem = (id: number) => {
     if (confirm('Are u sure?')) {
       removeCartItem(id);
@@ -21,7 +24,14 @@ export default function My({ session, logout, login, removeCartItem }: Props) {
   return (
     <>
       {session.loginUser ? (
-        <Profile session={session} logout={logout} />
+        <>
+          <Profile session={session} logout={logout} ref={logoutButtonRef} />
+          <Button
+            text='My_Logout'
+            onClick={() => logoutButtonRef.current?.click()}
+            classNames='my-3 rounded border border-black bg-green-700 text-white px-3 py-2'
+          />
+        </>
       ) : (
         <div className='flex justify-center'>
           <Login login={login} />
