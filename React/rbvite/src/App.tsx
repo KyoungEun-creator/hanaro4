@@ -1,6 +1,8 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import './App.css';
 import My from './components/My';
+import Hello, { MyHandler } from './components/Hello';
+import { flushSync } from 'react-dom';
 
 const SampleSession = {
   loginUser: { id: 1, name: 'Hong' },
@@ -17,6 +19,19 @@ export type Session = { loginUser: LoginUser | null; cart: CartItem[] };
 
 export default function App() {
   const [session, setSession] = useState<Session>(SampleSession);
+  const [count, setCount] = useState(0);
+
+  // useImperativeHandle 사용 -> Hello컴포넌트에 전달
+  const myHandleRef = useRef<MyHandler>(null);
+
+  const plusCount = () => {
+    setCount((pre) => {
+      const newer = pre + 1;
+      return newer;
+    });
+    flushSync(() => setCount((c) => c + 1));
+  };
+  const minusCount = () => setCount(count - 1);
 
   const logout = () => setSession({ ...session, loginUser: null });
 
@@ -33,8 +48,14 @@ export default function App() {
 
   return (
     <>
+      <Hello
+        name='홍길동'
+        age={20}
+        plusCount={plusCount}
+        minusCount={minusCount}
+        ref={myHandleRef}
+      />
       <pre>{JSON.stringify(session.loginUser)}</pre>
-      <h1>[ 장바구니 ]</h1>
 
       <My
         session={session}
@@ -42,6 +63,18 @@ export default function App() {
         login={login}
         removeCartItem={removeCartItem}
       />
+
+      <div className='my-3'>
+        <button
+          onClick={() => {
+            setCount((count) => count + 1);
+            myHandleRef.current?.jumpHelloState();
+          }}
+          className='rounded bg-slate-300 px-3 py-2'
+        >
+          App.count is {count}
+        </button>
+      </div>
     </>
   );
 }

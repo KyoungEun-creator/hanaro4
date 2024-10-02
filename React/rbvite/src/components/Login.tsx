@@ -28,7 +28,7 @@ export default function Login({
 
   return (
     <>
-      <div className='flex w-1/2 flex-col items-center border p-5'>
+      <div className='flex w-1/2 flex-col items-center p-5'>
         <h1 className='text-5xl font-bold'>Sign In</h1>
         <form onSubmit={signIn} className='mt-3 flex flex-col justify-between'>
           <div className='flex'>

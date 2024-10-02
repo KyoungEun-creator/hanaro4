@@ -5,6 +5,7 @@ import Login from './Login';
 import Profile from './Profile';
 import { FaTrashCan } from 'react-icons/fa6';
 import Button from './atoms/Button';
+import clsx from 'clsx';
 
 type Props = {
   session: Session;
@@ -23,21 +24,31 @@ export default function My({ session, logout, login, removeCartItem }: Props) {
 
   return (
     <>
-      {session.loginUser ? (
-        <>
-          <Profile session={session} logout={logout} ref={logoutButtonRef} />
-          <Button
-            text='My_Logout'
-            onClick={() => logoutButtonRef.current?.click()}
-            classNames='my-3 rounded border border-black bg-green-700 text-white px-3 py-2'
-          />
-        </>
-      ) : (
-        <div className='flex justify-center'>
-          <Login login={login} />
-        </div>
-      )}
-      <div className='flex justify-center'>
+      <div
+        className={clsx(
+          'my-5',
+          !session.loginUser && 'border-8 border-green-900'
+        )}
+      >
+        {session.loginUser ? (
+          <>
+            <Profile session={session} logout={logout} ref={logoutButtonRef} />
+            <Button
+              text='My_Logout'
+              onClick={() => logoutButtonRef.current?.click()}
+              classNames='my-3 rounded border border-black bg-green-700 text-white px-3 py-2'
+            />
+          </>
+        ) : (
+          <div className='flex justify-center'>
+            <Login login={login} />
+          </div>
+        )}
+      </div>
+
+      <div className='flex flex-col items-center'>
+        <h1>[ 장바구니 ]</h1>
+
         <div className='w-1/4 border'>
           <ul>
             {session.cart?.length ? (

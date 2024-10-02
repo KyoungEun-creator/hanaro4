@@ -9,8 +9,8 @@ type Props = {
 const Profile = forwardRef(
   ({ session, logout }: Props, ref: ForwardedRef<HTMLButtonElement>) => {
     return (
-      <div className='border'>
-        <h1 className='text-5xl'>{session.loginUser?.name} login!</h1>
+      <div className='border p-5'>
+        <h1 className='text-5xl'>Welcome, {session.loginUser?.name}</h1>
         <button
           onClick={logout}
           ref={ref}
