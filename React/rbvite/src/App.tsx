@@ -64,13 +64,12 @@ export default function App() {
         removeCartItem={removeCartItem}
       />
 
-      <div className='my-3'>
+      <div className='card'>
         <button
           onClick={() => {
-            setCount((count) => count + 1);
             myHandleRef.current?.jumpHelloState();
           }}
-          className='rounded bg-slate-300 px-3 py-2'
+          className='mt-4 rounded bg-slate-400 px-3 py-2 text-white'
         >
           App.count is {count}
         </button>

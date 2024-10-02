@@ -1,11 +1,11 @@
 // import { useState } from 'react';
 import { useRef } from 'react';
 import { Session } from '../App';
-import Login from './Login';
 import Profile from './Profile';
 import { FaTrashCan } from 'react-icons/fa6';
 import Button from './atoms/Button';
 import clsx from 'clsx';
+import Login from './Login';
 
 type Props = {
   session: Session;
@@ -49,7 +49,7 @@ export default function My({ session, logout, login, removeCartItem }: Props) {
       <div className='flex flex-col items-center'>
         <h1>[ 장바구니 ]</h1>
 
-        <div className='w-1/4 border'>
+        <div className='my-2 w-1/2 border p-4'>
           <ul>
             {session.cart?.length ? (
               session.cart.map(({ id, name, price }) => {
