@@ -1,14 +1,17 @@
-import { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes, PropsWithChildren } from 'react';
 
 type Props = {
-  text: string;
   classNames?: string;
 } & ButtonHTMLAttributes<HTMLButtonElement>;
 
-export default function Button({ text, classNames = '', ...props }: Props) {
+export default function Button({
+  children,
+  classNames = '',
+  ...props
+}: PropsWithChildren<Props>) {
   return (
-    <button {...props} className={` ${classNames}`}>
-      {text}
+    <button {...props} className={` ${classNames} flex items-center`}>
+      {children}
     </button>
   );
 }

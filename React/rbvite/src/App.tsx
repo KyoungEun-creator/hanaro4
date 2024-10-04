@@ -46,6 +46,14 @@ export default function App() {
     });
   };
 
+  const addCartItem = (name: string, price: number) => {
+    const id = Math.max(...session.cart.map((item) => item.id), 0) + 1;
+    setSession({
+      ...session,
+      cart: [...session.cart, { id, name, price }],
+    });
+  };
+
   return (
     <>
       <Hello
@@ -62,6 +70,7 @@ export default function App() {
         logout={logout}
         login={login}
         removeCartItem={removeCartItem}
+        addCartItem={addCartItem}
       />
 
       <div className='card'>

@@ -54,10 +54,9 @@ export default function Login({
             </div>
           </div>
 
-          <Button
-            classNames='my-5 rounded bg-green-200 px-3 py-2'
-            text='SignIn'
-          />
+          <Button classNames='my-5 rounded bg-green-200 px-3 py-2'>
+            SignIn
+          </Button>
         </form>
       </div>
     </>
