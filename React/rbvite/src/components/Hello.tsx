@@ -5,12 +5,11 @@ import {
   useImperativeHandle,
   useState,
 } from 'react';
+import { useCounter } from '../hooks/counter-hook';
 
 type Props = {
   name: string;
   age: number;
-  plusCount: () => void;
-  minusCount: () => void;
 };
 type TitleProps = { text: string; name: string; age: number };
 
@@ -21,6 +20,7 @@ const Title = ({ text, name, age }: TitleProps) => {
     </h1>
   );
 };
+
 const Body = ({ children }: { children: ReactNode }) => {
   return (
     <div className='red' style={{ color: 'yellowgreen' }}>
@@ -33,10 +33,10 @@ export type MyHandler = {
   jumpHelloState: () => void;
 };
 
-function Hello(
-  { name, age, plusCount, minusCount }: Props,
-  ref: ForwardedRef<MyHandler>
-) {
+function Hello({ name, age }: Props, ref: ForwardedRef<MyHandler>) {
+  // useContext를 통해 만든 useCounter가 전달해준 value인 plusCount, minusCount 사용
+  const { plusCount, minusCount } = useCounter();
+
   const [myState, setMyState] = useState(0);
   const handler: MyHandler = {
     jumpHelloState: () => setMyState((pre) => pre * 10),
