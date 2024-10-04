@@ -36,6 +36,8 @@ export default function App() {
 
   const logout = () => setSession({ ...session, loginUser: null });
 
+  // useImperativeHandle 사용 -> My컴포넌트 -> Login컴포넌트에 전달
+  // login validation check
   const loginRef = useRef<LoginHandler>(null);
   const login = (id: number, name: string) => {
     if (!id) {

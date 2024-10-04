@@ -23,6 +23,7 @@ export default forwardRef(function Login(
   const idRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
 
+  // focus를 위한 handler 생성
   const handler: LoginHandler = {
     focus(prop) {
       if (prop === 'id') idRef.current?.focus();
