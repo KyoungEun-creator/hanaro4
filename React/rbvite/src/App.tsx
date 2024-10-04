@@ -3,6 +3,7 @@ import './App.css';
 import My from './components/My';
 import Hello, { MyHandler } from './components/Hello';
 import { flushSync } from 'react-dom';
+import { type LoginHandler } from './components/Login';
 
 const SampleSession = {
   loginUser: { id: 1, name: 'Hong' },
@@ -35,7 +36,16 @@ export default function App() {
 
   const logout = () => setSession({ ...session, loginUser: null });
 
+  const loginRef = useRef<LoginHandler>(null);
   const login = (id: number, name: string) => {
+    if (!id) {
+      alert('ID를 입력하세요');
+      return loginRef.current?.focus('id');
+    }
+    if (!name) {
+      alert('Name을 입력하세요');
+      return loginRef.current?.focus('name');
+    }
     setSession({ ...session, loginUser: { id, name } });
   };
 
@@ -71,6 +81,7 @@ export default function App() {
         login={login}
         removeCartItem={removeCartItem}
         addCartItem={addCartItem}
+        ref={loginRef}
       />
 
       <div className='card'>

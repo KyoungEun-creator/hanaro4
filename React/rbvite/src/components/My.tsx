@@ -1,10 +1,10 @@
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useRef, useState, forwardRef, ForwardedRef } from 'react';
 import { Session } from '../App';
 import Profile from './Profile';
 import { FaPlus, FaTrashCan } from 'react-icons/fa6';
 import Button from './atoms/Button';
 import clsx from 'clsx';
-import Login from './Login';
+import Login, { type LoginHandler } from './Login';
 import { FaRedo, FaSave } from 'react-icons/fa';
 
 type Props = {
@@ -15,13 +15,10 @@ type Props = {
   addCartItem: (name: string, price: number) => void;
 };
 
-export default function My({
-  session,
-  logout,
-  login,
-  removeCartItem,
-  addCartItem,
-}: Props) {
+export default forwardRef(function My(
+  { session, logout, login, removeCartItem, addCartItem }: Props,
+  ref: ForwardedRef<LoginHandler>
+) {
   const [isEditing, setIsEditing] = useState(false); // add cart item
   const logoutButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -76,7 +73,7 @@ export default function My({
           </div>
         ) : (
           <div className='flex justify-center'>
-            <Login login={login} />
+            <Login login={login} ref={ref} />
           </div>
         )}
       </div>
@@ -153,4 +150,4 @@ export default function My({
       </div>
     </>
   );
-}
+});

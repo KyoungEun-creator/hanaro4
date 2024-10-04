@@ -1,28 +1,40 @@
-import { FormEvent, useRef } from 'react';
+import {
+  FormEvent,
+  ForwardedRef,
+  forwardRef,
+  useImperativeHandle,
+  useRef,
+} from 'react';
 import LabelInput from './molecules/LabelInput';
 import Button from './atoms/Button';
 
-export default function Login({
-  login,
-}: {
-  login: (id: number, name: string) => void;
-}) {
+export type LoginHandler = {
+  focus: (prop: string) => void;
+};
+
+export default forwardRef(function Login(
+  {
+    login,
+  }: {
+    login: (id: number, name: string) => void;
+  },
+  ref: ForwardedRef<LoginHandler>
+) {
   const idRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
 
+  const handler: LoginHandler = {
+    focus(prop) {
+      if (prop === 'id') idRef.current?.focus();
+      if (prop === 'name') nameRef.current?.focus();
+    },
+  };
+  useImperativeHandle(ref, () => handler);
+
   const signIn = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const id = idRef.current?.value;
-    const name = nameRef.current?.value;
-
-    if (!id) {
-      alert('id needed!');
-      return;
-    } else if (!name) {
-      alert('name needed!');
-      return;
-    }
-
+    const id = idRef.current?.value ?? 0;
+    const name = nameRef.current?.value ?? '';
     login(+id, name);
   };
 
@@ -61,4 +73,4 @@ export default function Login({
       </div>
     </>
   );
-}
+});
