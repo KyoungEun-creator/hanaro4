@@ -35,7 +35,7 @@ export type MyHandler = {
 
 function Hello({ name, age }: Props, ref: ForwardedRef<MyHandler>) {
   // useContext를 통해 만든 useCounter가 전달해준 value인 plusCount, minusCount 사용
-  const { plusCount, minusCount } = useCounter();
+  const { count, plusCount, minusCount } = useCounter();
 
   const [myState, setMyState] = useState(0);
   const handler: MyHandler = {
@@ -48,21 +48,30 @@ function Hello({ name, age }: Props, ref: ForwardedRef<MyHandler>) {
       <div>
         <Title text='Hello' name={name} age={age} />
 
-        <Body>This is Hello Component - {myState}</Body>
+        <Body>
+          This is Hello Component - (count: {count}) - (myState: {myState})
+        </Body>
         <button
           onClick={() => {
-            setMyState(myState + 1);
             plusCount();
           }}
           className='mx-3 my-5 rounded bg-green-200 px-3 py-2'
         >
-          HelloPlusBtn
+          HelloPlusCountBtn
         </button>
         <button
           className='my-5 rounded bg-green-200 px-3 py-2'
           onClick={minusCount}
         >
-          HelloMinusBtn
+          HelloMinusCountBtn
+        </button>
+        <button
+          onClick={() => {
+            setMyState(myState + 1);
+          }}
+          className='mx-3 my-5 rounded bg-green-200 px-3 py-2'
+        >
+          HelloPlusStateBtn
         </button>
       </div>
     </>

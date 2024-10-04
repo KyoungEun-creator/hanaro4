@@ -3,7 +3,7 @@ import './App.css';
 import My from './components/My';
 import Hello, { MyHandler } from './components/Hello';
 import { type LoginHandler } from './components/Login';
-import { useCounter } from './hooks/counter-hook';
+import { CounterProvider } from './hooks/counter-hook';
 
 const SampleSession = {
   loginUser: { id: 1, name: 'Hong' },
@@ -19,8 +19,6 @@ type CartItem = { id: number; name: string; price: number };
 export type Session = { loginUser: LoginUser | null; cart: CartItem[] };
 
 export default function App() {
-  // useContext를 통해 만든 useCounter가 전달해준 value인 count 사용
-  const { count } = useCounter();
   const [session, setSession] = useState<Session>(SampleSession);
 
   // useImperativeHandle 사용 -> Hello컴포넌트에 전달
@@ -60,7 +58,9 @@ export default function App() {
 
   return (
     <>
-      <Hello name='홍길동' age={20} ref={myHandleRef} />
+      <CounterProvider>
+        <Hello name='홍길동' age={20} ref={myHandleRef} />
+      </CounterProvider>
       <pre>{JSON.stringify(session.loginUser)}</pre>
 
       <My
@@ -71,17 +71,6 @@ export default function App() {
         addCartItem={addCartItem}
         ref={loginRef}
       />
-
-      <div className='card'>
-        <button
-          onClick={() => {
-            myHandleRef.current?.jumpHelloState();
-          }}
-          className='mt-4 rounded bg-slate-400 px-3 py-2 text-white'
-        >
-          App.count is {count}
-        </button>
-      </div>
     </>
   );
 }

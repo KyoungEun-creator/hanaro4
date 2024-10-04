@@ -19,7 +19,7 @@ export const CounterProvider = ({ children }: PropsWithChildren) => {
   const plusCount = () => {
     flushSync(() => setCount((c) => c + 1));
   };
-  const minusCount = () => setCount(count - 1);
+  const minusCount = () => setCount((count) => count - 1);
 
   return (
     <CounterContext.Provider value={{ count, plusCount, minusCount }}>
