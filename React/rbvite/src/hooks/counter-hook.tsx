@@ -1,17 +1,15 @@
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
 import { flushSync } from 'react-dom';
 
-type TCounterContext = {
-  count: number;
-  plusCount: () => void;
-  minusCount: () => void;
-};
-
-const CounterContext = createContext<TCounterContext>({
+const CounterContextInitValue = {
   count: 0,
   plusCount: () => {},
   minusCount: () => {},
-});
+};
+
+type TCounterContext = typeof CounterContextInitValue;
+
+const CounterContext = createContext<TCounterContext>(CounterContextInitValue);
 
 export const CounterProvider = ({ children }: PropsWithChildren) => {
   const [count, setCount] = useState(0);

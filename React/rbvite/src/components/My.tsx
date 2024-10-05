@@ -1,24 +1,14 @@
-import { FormEvent, useRef, useState, forwardRef, ForwardedRef } from 'react';
-import { Session } from '../App';
+import { FormEvent, useRef, useState } from 'react';
 import Profile from './Profile';
 import { FaPlus, FaTrashCan } from 'react-icons/fa6';
 import Button from './atoms/Button';
 import clsx from 'clsx';
-import Login, { type LoginHandler } from './Login';
+import Login from './Login';
 import { FaRedo, FaSave } from 'react-icons/fa';
+import { useSession } from '../hooks/session-context';
 
-type Props = {
-  session: Session;
-  logout: () => void;
-  login: (id: number, name: string) => void;
-  removeCartItem: (itemId: number) => void;
-  addCartItem: (name: string, price: number) => void;
-};
-
-export default forwardRef(function My(
-  { session, logout, login, removeCartItem, addCartItem }: Props,
-  ref: ForwardedRef<LoginHandler>
-) {
+export default function My() {
+  const { session, removeCartItem, addCartItem } = useSession(); // useContext
   const [isEditing, setIsEditing] = useState(false); // add cart item
   const logoutButtonRef = useRef<HTMLButtonElement>(null);
 
@@ -55,15 +45,16 @@ export default forwardRef(function My(
 
   return (
     <>
+      <pre>{JSON.stringify(session.loginUser)}</pre>
       <div
         className={clsx(
-          'my-5',
-          !session.loginUser && 'border-8 border-green-900'
+          'my-3',
+          !session.loginUser && 'border-4 border-green-900'
         )}
       >
         {session.loginUser ? (
           <div className='flex flex-col items-center'>
-            <Profile session={session} logout={logout} ref={logoutButtonRef} />
+            <Profile ref={logoutButtonRef} />
             <Button
               onClick={() => logoutButtonRef.current?.click()}
               classNames='my-3 rounded border border-black bg-green-700 text-white px-3 py-2'
@@ -73,7 +64,7 @@ export default forwardRef(function My(
           </div>
         ) : (
           <div className='flex justify-center'>
-            <Login login={login} ref={ref} />
+            <Login />
           </div>
         )}
       </div>
@@ -150,4 +141,4 @@ export default forwardRef(function My(
       </div>
     </>
   );
-});
+}

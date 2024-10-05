@@ -6,17 +6,17 @@ import {
   useState,
 } from 'react';
 import { useCounter } from '../hooks/counter-hook';
+import { useSession } from '../hooks/session-context';
 
 type Props = {
-  name: string;
   age: number;
 };
-type TitleProps = { text: string; name: string; age: number };
+type TitleProps = { text: string; name?: string; age: number };
 
-const Title = ({ text, name, age }: TitleProps) => {
+const Title = ({ text, name = 'unknown', age }: TitleProps) => {
   return (
     <h1>
-      {text} - {name} - {age}
+      {text} - (name: {name}) - (age: {age})
     </h1>
   );
 };
@@ -33,9 +33,11 @@ export type MyHandler = {
   jumpHelloState: () => void;
 };
 
-function Hello({ name, age }: Props, ref: ForwardedRef<MyHandler>) {
-  // useContext를 통해 만든 useCounter가 전달해준 value인 plusCount, minusCount 사용
-  const { count, plusCount, minusCount } = useCounter();
+function Hello({ age }: Props, ref: ForwardedRef<MyHandler>) {
+  const { count, plusCount, minusCount } = useCounter(); // useContext
+  const {
+    session: { loginUser },
+  } = useSession(); // useContext
 
   const [myState, setMyState] = useState(0);
   const handler: MyHandler = {
@@ -46,7 +48,7 @@ function Hello({ name, age }: Props, ref: ForwardedRef<MyHandler>) {
   return (
     <>
       <div>
-        <Title text='Hello' name={name} age={age} />
+        <Title text='Hello' name={loginUser?.name} age={age} />
 
         <Body>
           This is Hello Component - (count: {count}) - (myState: {myState})
