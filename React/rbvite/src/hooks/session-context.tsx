@@ -15,10 +15,11 @@ const SampleSession = {
     { id: 101, name: '컵라면', price: 2000 },
     { id: 200, name: '파', price: 5000 },
   ],
+  dirtyAttributes: { name: { before: '', curr: '' } },
 };
 
 type LoginUser = typeof SampleSession.loginUser;
-type CartItem = { id: number; name: string; price: number };
+export type CartItem = { id: number; name: string; price: number };
 export type Session = { loginUser: LoginUser | null; cart: CartItem[] };
 
 const SessionContextInitValue = {
@@ -69,9 +70,22 @@ export const SessionProvider = ({ children }: PropsWithChildren) => {
     });
   };
 
+  // const editItem = (id: number, before: string, curr: string) => {
+  //   setSession({
+  //     ...session,
+  //   });
+  // };
+
   return (
     <SessionContext.Provider
-      value={{ session, logout, login, removeCartItem, addCartItem, loginRef }}
+      value={{
+        session,
+        logout,
+        login,
+        removeCartItem,
+        addCartItem,
+        loginRef,
+      }}
     >
       {children}
     </SessionContext.Provider>

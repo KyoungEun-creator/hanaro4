@@ -1,46 +1,20 @@
-import { FormEvent, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import Profile from './Profile';
-import { FaPlus, FaTrashCan } from 'react-icons/fa6';
+import { FaPlus } from 'react-icons/fa6';
 import Button from './atoms/Button';
 import clsx from 'clsx';
 import Login from './Login';
-import { FaRedo, FaSave } from 'react-icons/fa';
 import { useSession } from '../hooks/session-context';
+import Item from './Item';
 
 export default function My() {
-  const { session, removeCartItem, addCartItem } = useSession(); // useContext
-  const [isEditing, setIsEditing] = useState(false); // add cart item
+  const { session } = useSession(); // useContext
+  const [isAdding, setIsAdding] = useState(false); // add cart item
   const logoutButtonRef = useRef<HTMLButtonElement>(null);
 
-  const nameRef = useRef<HTMLInputElement>(null);
-  const priceRef = useRef<HTMLInputElement>(null);
-
-  // onClick 이벤트 안에서 setIsEditing 직접 사용 지양
-  const toggleEditing = () => {
-    setIsEditing((pre) => !pre);
-  };
-
-  const removeItem = (id: number) => {
-    if (confirm('Are u sure?')) {
-      removeCartItem(id);
-    }
-  };
-
-  // 수정, 추가
-  const saveItem = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const name = nameRef.current?.value;
-    const price = priceRef.current?.value;
-    if (!name) {
-      alert('상품명을 입력하세요');
-      return nameRef.current?.focus();
-    } else if (!price) {
-      alert('가격을 입력하세요');
-      return priceRef.current?.focus();
-    }
-    addCartItem(name, Number(price));
-    nameRef.current.value = '';
-    priceRef.current.value = '';
+  // onClick 이벤트 안에서 setIsAdding 직접 사용 지양 위함
+  const toggleAdding = () => {
+    setIsAdding((pre) => !pre);
   };
 
   return (
@@ -75,21 +49,11 @@ export default function My() {
         <div className='my-2 w-1/2 border p-4'>
           <ul>
             {session.cart?.length ? (
-              session.cart.map(({ id, name, price }) => {
+              session.cart.map((item) => {
                 return (
-                  <li key={id} className='flex justify-between p-3'>
-                    <strong>
-                      {`[${id}]`} {name}{' '}
-                      <small className='font-'>
-                        ({price.toLocaleString()}원)
-                      </small>
-                    </strong>
-                    <button
-                      onClick={() => removeItem(id)}
-                      className='btn btn-danger px-1 py-0'
-                    >
-                      <FaTrashCan />
-                    </button>
+                  <li key={item.id}>
+                    <Item item={item} />{' '}
+                    {/* 수정,삭제 기능만 => toggleAdding 불필요 */}
                   </li>
                 );
               })
@@ -97,38 +61,16 @@ export default function My() {
               <li className='text-slate-500'>There is no items.</li>
             )}
             <li>
-              {isEditing ? (
-                <form onSubmit={saveItem} className='my-2 flex justify-between'>
-                  <input
-                    type='text'
-                    ref={nameRef}
-                    placeholder='name'
-                    className='border px-3'
-                  />
-                  <input
-                    type='number'
-                    ref={priceRef}
-                    placeholder='price'
-                    className='border px-3'
-                  />
-                  <Button
-                    type='reset'
-                    onClick={toggleEditing}
-                    classNames='border bg-red-200 px-3 py-2 rounded'
-                  >
-                    <FaRedo />
-                  </Button>
-                  <Button
-                    type='submit'
-                    classNames='border bg-green-200 px-3 py-2 rounded'
-                  >
-                    <FaSave />
-                  </Button>
-                </form>
+              {isAdding ? (
+                // 추가,취소
+                <Item
+                  item={{ id: 0, name: '', price: 0 }}
+                  toggleAdding={toggleAdding}
+                />
               ) : (
                 <div className='flex justify-center'>
                   <Button
-                    onClick={toggleEditing}
+                    onClick={toggleAdding}
                     classNames='border-2 border-slate-400 px-3 py-2 rounded flex justify-center'
                   >
                     <FaPlus /> Add Item
