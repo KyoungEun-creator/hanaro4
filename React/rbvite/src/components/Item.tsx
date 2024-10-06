@@ -14,6 +14,8 @@ export default function Item({ item, toggleAdding }: Props) {
   const { removeCartItem, addCartItem, editCartItem } = useSession();
 
   const [isEditing, setIsEditing] = useState(!id); // edit, add cart item
+  const [hasDirty, setDirty] = useState(false); // something changed
+
   const nameRef = useRef<HTMLInputElement>(null);
   const priceRef = useRef<HTMLInputElement>(null);
 
@@ -53,6 +55,13 @@ export default function Item({ item, toggleAdding }: Props) {
     toggleEditing();
   };
 
+  // 수정 여부 확인을 통한 저장버튼 유무
+  const checkDirty = () => {
+    const currName = nameRef.current?.value;
+    const currPrice = Number(priceRef.current?.value);
+    setDirty(name !== currName || price !== currPrice);
+  };
+
   return (
     <>
       {isEditing ? (
@@ -60,15 +69,17 @@ export default function Item({ item, toggleAdding }: Props) {
           <input
             type='text'
             ref={nameRef}
-            placeholder='name'
+            onChange={checkDirty}
             defaultValue={name}
+            placeholder='name'
             className='border px-3'
           />
           <input
             type='number'
             ref={priceRef}
-            placeholder='price'
+            onChange={(e) => setDirty(price !== +e.currentTarget.value)}
             defaultValue={price}
+            placeholder='price'
             className='border px-3'
           />
           <Button
@@ -78,12 +89,14 @@ export default function Item({ item, toggleAdding }: Props) {
           >
             <FaRedo />
           </Button>
-          <Button
-            type='submit'
-            classNames='border bg-green-200 px-3 py-2 rounded'
-          >
-            <FaSave />
-          </Button>
+          {hasDirty && (
+            <Button
+              type='submit'
+              classNames='border bg-green-200 px-3 py-2 rounded'
+            >
+              <FaSave />
+            </Button>
+          )}
         </form>
       ) : (
         <a
