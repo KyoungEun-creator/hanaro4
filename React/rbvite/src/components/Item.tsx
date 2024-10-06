@@ -11,7 +11,7 @@ type Props = {
 
 export default function Item({ item, toggleAdding }: Props) {
   const { id, name, price } = item;
-  const { removeCartItem, addCartItem } = useSession();
+  const { removeCartItem, addCartItem, editCartItem } = useSession();
 
   const [isEditing, setIsEditing] = useState(!id); // edit, add cart item
   const nameRef = useRef<HTMLInputElement>(null);
@@ -42,7 +42,11 @@ export default function Item({ item, toggleAdding }: Props) {
       return priceRef.current?.focus();
     }
 
-    addCartItem(name, Number(price));
+    if (id === 0) {
+      addCartItem(name, Number(price));
+    } else {
+      editCartItem({ id, name, price: +price });
+    }
     nameRef.current.value = '';
     priceRef.current.value = '';
 
@@ -67,8 +71,11 @@ export default function Item({ item, toggleAdding }: Props) {
             defaultValue={price}
             className='border px-3'
           />
-          <Button type='reset' onClick={toggleEditing}
-          classNames='border bg-red-200 px-3 py-2 rounded'>
+          <Button
+            type='reset'
+            onClick={toggleEditing}
+            classNames='border bg-red-200 px-3 py-2 rounded'
+          >
             <FaRedo />
           </Button>
           <Button
@@ -79,10 +86,15 @@ export default function Item({ item, toggleAdding }: Props) {
           </Button>
         </form>
       ) : (
-        <div key={id} className='flex justify-between p-3'>
-          <strong>
+        <a
+          href='#'
+          key={id}
+          onClick={toggleEditing}
+          className='group flex justify-between p-3 hover:bg-gray-100'
+        >
+          <strong className='group-hover:text-blue-500'>
             {`[${id}]`} {name}{' '}
-            <small className='font-'>({price.toLocaleString()}원)</small>
+            <small className='font-light'>({price.toLocaleString()}원)</small>
           </strong>
           <button
             onClick={() => removeItem(id)}
@@ -90,7 +102,7 @@ export default function Item({ item, toggleAdding }: Props) {
           >
             <FaTrashCan />
           </button>
-        </div>
+        </a>
       )}
     </>
   );
