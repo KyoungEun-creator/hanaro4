@@ -64,7 +64,7 @@ export default function My() {
               {isAdding ? (
                 // 추가,취소
                 <Item
-                  item={{ id: 0, name: '', price: 0 }}
+                  item={{ id: 0, name: '', price: 0 }} // 초기값 세팅
                   toggleAdding={toggleAdding}
                 />
               ) : (

@@ -1,12 +1,12 @@
 import { FaTrashCan } from 'react-icons/fa6';
 import { useSession, type CartItem } from '../hooks/session-context';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, MouseEvent, useRef, useState } from 'react';
 import Button from './atoms/Button';
 import { FaRedo, FaSave } from 'react-icons/fa';
 
 type Props = {
   item: CartItem;
-  toggleAdding?: () => void;
+  toggleAdding?: () => void; // add할 때만 전달
 };
 
 export default function Item({ item, toggleAdding }: Props) {
@@ -20,9 +20,23 @@ export default function Item({ item, toggleAdding }: Props) {
   const priceRef = useRef<HTMLInputElement>(null);
 
   // onClick 이벤트 안에서 setIsAdding 직접 사용 지양 위함
-  const toggleEditing = () => {
-    if (toggleAdding) toggleAdding();
-    else setIsEditing((pre) => !pre);
+  const toggleEditing = (
+    e?: FormEvent<HTMLInputElement> | MouseEvent<HTMLButtonElement>
+  ) => {
+    e?.preventDefault();
+
+    // reset 버튼 클릭 시 input value 원래값으로 복귀되도록
+    if (hasDirty && nameRef.current && priceRef.current) {
+      nameRef.current.value = name;
+      priceRef.current.value = String(price);
+
+      checkDirty();
+    }
+
+    setTimeout(() => {
+      if (toggleAdding) toggleAdding();
+      else setIsEditing((pre) => !pre);
+    }, 1000);
   };
 
   const removeItem = (id: number) => {
@@ -32,10 +46,11 @@ export default function Item({ item, toggleAdding }: Props) {
   };
 
   // 수정, 추가
-  const saveItem = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const saveItem = (e?: FormEvent<HTMLFormElement>) => {
+    e?.preventDefault();
     const name = nameRef.current?.value;
     const price = priceRef.current?.value;
+
     if (!name) {
       alert('상품명을 입력하세요');
       return nameRef.current?.focus();
@@ -49,8 +64,10 @@ export default function Item({ item, toggleAdding }: Props) {
     } else {
       editCartItem({ id, name, price: +price });
     }
+
     nameRef.current.value = '';
     priceRef.current.value = '';
+    nameRef.current.focus();
 
     toggleEditing();
   };
@@ -102,7 +119,7 @@ export default function Item({ item, toggleAdding }: Props) {
         <a
           href='#'
           key={id}
-          onClick={toggleEditing}
+          onClick={() => toggleEditing()}
           className='group flex justify-between p-3 hover:bg-gray-100'
         >
           <strong className='group-hover:text-blue-500'>
