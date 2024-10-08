@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+import Nav from '@/components/Nav';
 import './globals.css';
 
 const geistSans = localFont({
@@ -28,7 +29,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <header>
+          <Nav />
+        </header>
+        <main className='flex flex-col items-center'> {children}</main>
+        <footer className='flex justify-center my-3 py-2 border'>
+          Hanaro 2024
+        </footer>
       </body>
     </html>
   );
