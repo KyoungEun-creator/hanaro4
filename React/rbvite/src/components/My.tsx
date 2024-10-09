@@ -9,6 +9,7 @@ import Item from './Item';
 
 export default function My() {
   const { session } = useSession(); // useContext
+
   const [isAdding, setIsAdding] = useState(false); // add cart item
   const logoutButtonRef = useRef<HTMLButtonElement>(null);
 

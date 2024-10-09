@@ -1,5 +1,5 @@
 import { createContext, PropsWithChildren, useContext, useState } from 'react';
-import { flushSync } from 'react-dom';
+// import { flushSync } from 'react-dom';
 
 const CounterContextInitValue = {
   count: 0,
@@ -15,9 +15,10 @@ export const CounterProvider = ({ children }: PropsWithChildren) => {
   const [count, setCount] = useState(0);
 
   const plusCount = () => {
-    flushSync(() => setCount((c) => c + 1));
+    setCount((preCount) => preCount + 1);
+    // flushSync(() => setCount((c) => c + 1));
   };
-  const minusCount = () => setCount((count) => count - 1);
+  const minusCount = () => setCount((preCount) => preCount - 1);
 
   return (
     <CounterContext.Provider value={{ count, plusCount, minusCount }}>

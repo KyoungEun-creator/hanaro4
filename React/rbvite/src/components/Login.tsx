@@ -1,7 +1,8 @@
-import { FormEvent, useImperativeHandle, useRef } from 'react';
+import { FormEvent, useEffect, useImperativeHandle, useRef } from 'react';
 import LabelInput from './molecules/LabelInput';
 import Button from './atoms/Button';
 import { useSession } from '../hooks/session-context';
+import { useCounter } from '../hooks/counter-hook';
 
 export type LoginHandler = {
   focus: (prop: string) => void;
@@ -9,6 +10,7 @@ export type LoginHandler = {
 
 export default function Login() {
   const { login, loginRef } = useSession(); // useContext
+  const { plusCount, minusCount } = useCounter();
 
   const idRef = useRef<HTMLInputElement>(null);
   const nameRef = useRef<HTMLInputElement>(null);
@@ -28,6 +30,33 @@ export default function Login() {
     const name = nameRef.current?.value ?? '';
     login(+id, name);
   };
+
+  // useEffect(() => {
+  //   idRef.current?.focus();
+  //   console.log('********111'); // 1
+
+  //   return () => console.log('unmount1111'); // 2 // 4
+  // }, []);
+
+  // useEffect(() => {
+  //   // alert('login plz'); // 1 // 4
+  //   console.log('********222'); // 2 // 5
+
+  //   return () => console.log('unmount2222'); // 3
+  // }, []);
+
+  useEffect(() => {
+    const intl = setInterval(() => console.log('500'), 500);
+
+    return () => clearInterval(intl);
+  }, []);
+
+  useEffect(() => {
+    plusCount();
+
+    return () => minusCount();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <>
