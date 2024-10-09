@@ -5,5 +5,8 @@ export default function useToggle(defaultValue: boolean = false) {
 
   const toggle = () => setState((pre) => !pre);
 
-  return [state, toggle] as [boolean, () => void];
+  //   const a = [state, toggle]; // (boolean | (() => void))[]
+  //   const t = [state, toggle] as const; // readonly [boolean, () => void]: fixed array가 됨
+
+  return [state, toggle] as const; // array가 아닌 tuple로 전달하기 위함
 }
