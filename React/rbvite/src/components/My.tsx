@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef } from 'react';
 import Profile from './Profile';
 import { FaPlus } from 'react-icons/fa6';
 import Button from './atoms/Button';
@@ -6,17 +6,17 @@ import clsx from 'clsx';
 import Login from './Login';
 import { useSession } from '../hooks/session-context';
 import Item from './Item';
+import useToggle from '../hooks/toggle';
 
 export default function My() {
   const { session } = useSession(); // useContext
-
-  const [isAdding, setIsAdding] = useState(false); // add cart item
   const logoutButtonRef = useRef<HTMLButtonElement>(null);
 
-  // onClick 이벤트 안에서 setIsAdding 직접 사용 지양 위함
-  const toggleAdding = () => {
-    setIsAdding((pre) => !pre);
-  };
+  // const [isAdding, setIsAdding] = useState(false); // add cart item
+  // const toggleAdding = () => {
+  //   setIsAdding((pre) => !pre);
+  // };
+  const [isAdding, toggleAdding] = useToggle(); // Custom Hook
 
   return (
     <>
@@ -54,7 +54,6 @@ export default function My() {
                 return (
                   <li key={item.id}>
                     <Item item={item} />{' '}
-                    {/* 수정,삭제 기능만 => toggleAdding 불필요 */}
                   </li>
                 );
               })
@@ -63,7 +62,6 @@ export default function My() {
             )}
             <li>
               {isAdding ? (
-                // 추가,취소
                 <Item
                   item={{ id: 0, name: '', price: 0 }} // 초기값 세팅
                   toggleAdding={toggleAdding}
