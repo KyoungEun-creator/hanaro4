@@ -1,3 +1,3 @@
-export default function Baa() {
+export default function Bbb() {
   return <>@profile/bbb Page</>;
 }

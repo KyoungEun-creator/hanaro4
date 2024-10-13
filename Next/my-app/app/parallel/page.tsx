@@ -1,3 +1,3 @@
 export default function Parallel() {
-  return <>parallel</>;
+  return <>Parallel Page</>;
 }
