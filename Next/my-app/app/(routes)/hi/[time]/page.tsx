@@ -1,7 +1,9 @@
 type TParams = {
   params: {
     time: string;
-    cmt: string;
+  };
+  searchParams: {
+    q: string;
   };
 };
 
@@ -9,10 +11,14 @@ export function generateStaticParams() {
   return ['morning', 'afternoon', 'evening', 'night'].map((time) => ({ time }));
 }
 
-export default function Time({ params: { time, cmt } }: TParams) {
+export default function Time({
+  params: { time },
+  searchParams: { q },
+}: TParams) {
   return (
     <div className='capitalize'>
-      Good {time} - comment: <div>{cmt}</div>!!!
+      Good {time}
+      <span className='text-red-500 font-bold'>{q}</span>
     </div>
   );
 }

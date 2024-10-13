@@ -9,7 +9,7 @@ export default function HiLayout({ children }: PropsWithChildren) {
         <h1 className='text-2xl'>Hi Layout</h1>
         <div className='flex gap-3'>
           {TIMES.map((time) => (
-            <a key={time} href={`/hi/${time}`}>
+            <a key={time} href={`/hi/${time}`} className='capitalize'>
               {time}
             </a>
           ))}

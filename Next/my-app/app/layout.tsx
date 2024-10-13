@@ -32,7 +32,7 @@ export default function RootLayout({
         <header>
           <Nav />
         </header>
-        <main className='flex flex-col items-center'> {children}</main>
+        <main className='flex flex-col items-center'>{children}</main>
         <footer className='flex justify-center my-3 py-2 border'>
           Hanaro 2024
         </footer>

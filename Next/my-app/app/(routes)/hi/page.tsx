@@ -1,3 +1,3 @@
 export default function HI() {
-  return <>Hi</>;
+  return <>Hi Page</>;
 }
