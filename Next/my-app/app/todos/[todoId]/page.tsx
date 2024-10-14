@@ -12,6 +12,11 @@ export default async function Todo({
   const { title, completed } = await getTodo(+todoId);
   console.log('todos/todo >>', todoId);
 
+  if (!title) {
+    // return <h1 className='text-2xl text-red-500'>#{todoId} is not found!</h1>;
+    throw new Error(`#${todoId} is not found!`);
+  }
+
   return (
     <div className='text-left'>
       <div>id: {todoId}</div>
