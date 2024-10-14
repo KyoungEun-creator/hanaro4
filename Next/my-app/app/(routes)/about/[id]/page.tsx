@@ -19,7 +19,8 @@ export default async function AboutTodos({
   const todos = await getTodos(1);
   const todo = todos.find((td) => td.id === +id);
   if (!todo) {
-    return <h1 className='text-2xl text-red-500'>#{id} is not found!</h1>;
+    // return <h1 className='text-2xl text-red-500'>#{id} is not found!</h1>;
+    throw new Error(`#${id} is not found!`);
   }
 
   const { title, completed } = todo;
