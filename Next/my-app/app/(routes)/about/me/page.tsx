@@ -1,6 +1,8 @@
 'use client';
 
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { cn } from '@/lib/utils';
+import Modal from '@/components/Modal';
 
 export default function Me() {
   const router = useRouter();
@@ -22,8 +24,8 @@ export default function Me() {
   };
 
   return (
-    <>
-      <div className='flex border flex-col items-center'>
+    <Modal>
+      <div className={cn('flex border flex-col items-center')}>
         <button onClick={goBack} className='border border-blue-500 p-2'>
           Go Back
         </button>
@@ -38,6 +40,6 @@ export default function Me() {
         </button>
       </div>
       Me Page: {pathname}?xxx={searchParams.get('xxx')}
-    </>
+    </Modal>
   );
 }
