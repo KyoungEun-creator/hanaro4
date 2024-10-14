@@ -1,9 +1,12 @@
-import getTodos from '@/lib/todos';
+import { getTodos } from '@/lib/todos';
+
+export const revalidate = 5;
+// export const dynamic = 'force-dynamic';
 
 export async function generateStaticParams() {
-  return (await getTodos(1)).map(({ id }) => {
+  return (await getTodos(1)).map(({ id }: { id: number }) => {
     {
-      id: id.toString();
+      id.toString();
     }
   });
 }
