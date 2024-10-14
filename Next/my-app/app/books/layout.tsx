@@ -12,7 +12,7 @@ export default function BooksLayout({ children }: { children: ReactNode }) {
     data: books,
     isLoading,
     error,
-  } = useFetch<TBook[]>('http://localhost:3000/api/books');
+  } = useFetch<TBook[]>(`${process.env.BASE_URL}/api/books`);
 
   if (error) return <div className='text-red-500'>{error.message}</div>;
 
