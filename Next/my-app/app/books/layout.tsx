@@ -12,7 +12,7 @@ export default function BooksLayout({ children }: { children: ReactNode }) {
     data: books,
     isLoading,
     error,
-  } = useFetch<TBook[]>(`${process.env.BASE_URL}/api/books`);
+  } = useFetch<TBook[]>(`${process.env.NEXT_PUBLIC_URL}/api/books`);
 
   if (error) return <div className='text-red-500'>{error.message}</div>;
 
@@ -27,7 +27,7 @@ export default function BooksLayout({ children }: { children: ReactNode }) {
 
   return (
     <>
-      <h1 className='text-2xl'>My Book Case</h1>
+      <h1 className='text-2xl my-3'>My Book Case</h1>
       <div className='grid grid-cols-2 gap-3 w-full border border-green-400 p-4'>
         {isLoading ? (
           <>is loading..</>

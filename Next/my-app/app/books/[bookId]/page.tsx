@@ -1,6 +1,8 @@
 import { getBook } from '@/actions/books';
-import { type TBook } from '@/app/api/books/bookdata';
-import NotFound from '@/app/not-found';
+import { Pencil1Icon } from '@radix-ui/react-icons';
+import Link from 'next/link';
+import DelBook from '@/components/DelBook';
+import { Button } from '@/components/ui/button';
 import NotFoundBook from '../not-found';
 
 export default async function Book({
@@ -16,10 +18,25 @@ export default async function Book({
 
   return (
     <>
-      <div className='flex flex-col'>
-        <span>bookId: {bookId}</span>
-        <span>title: {book.title}</span>
-        <span>writer: {book.writer}</span>
+      <div className='flex flex-col space-y-3'>
+        <span className='border-b-2 border-green-500 flex justify-between'>
+          bookId: <strong>{bookId}</strong>
+        </span>
+        <span className='border-b-2 border-green-500 flex justify-between'>
+          title: <strong>{book.title}</strong>
+        </span>
+        <span className='border-b-2 border-green-500 flex justify-between'>
+          writer: <strong>{book.writer}</strong>
+        </span>
+
+        <div className='space-x-4 flex items-center justify-center'>
+          <DelBook id={+bookId} />
+          <Link href={`/books/${bookId}/edit`}>
+            <Button variant={'outline'}>
+              <Pencil1Icon /> Edit
+            </Button>
+          </Link>
+        </div>
       </div>
     </>
   );
