@@ -4,12 +4,12 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 
-export default function EditBook({
+export default async function EditBook({
   params: { bookId },
 }: {
   params: { bookId: string };
 }) {
-  const { title, writer } = getBook(+bookId);
+  const { title, writer } = await getBook(+bookId);
 
   async function saveBook(formData: FormData) {
     'use server';

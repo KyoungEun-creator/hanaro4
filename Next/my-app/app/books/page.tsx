@@ -1,6 +1,7 @@
 'use client';
 
 import { useFetch } from '@/hooks/fetch-hook';
+import { useSession } from 'next-auth/react';
 import Link from 'next/link';
 import { useState } from 'react';
 import { Input } from '@/components/ui/input';
@@ -10,11 +11,12 @@ export default function Books() {
   //   const [books, setBooks] = useState<TBook[]>([]);
   const [searchStr, setSearchStr] = useState('');
 
-  const {
-    data: books,
-    isLoading,
-    error,
-  } = useFetch<TBook[]>(`${process.env.NEXT_PUBLIC_URL}/api/books`);
+  const { data: session } = useSession();
+  console.log('🚀   session:', session);
+
+  const { data: books, error } = useFetch<TBook[]>(
+    `${process.env.NEXT_PUBLIC_URL}/api/books`
+  );
 
   if (error) return <div className='text-red-500'>{error.message}</div>;
 
@@ -29,7 +31,7 @@ export default function Books() {
 
   return (
     <>
-      <h1 className='text-2xl'>My Books</h1>
+      <h1 className='text-2xl'>{session?.user?.name} Books</h1>
       <Input
         onChange={(e) => setSearchStr(e.currentTarget.value)}
         placeholder='title or writer'

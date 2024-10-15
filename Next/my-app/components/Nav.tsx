@@ -1,4 +1,9 @@
-export default function Nav() {
+import { SessionProvider } from 'next-auth/react';
+import { auth } from '@/lib/auth';
+import SignInOut from './SignInOut';
+
+export default async function Nav() {
+  const session = await auth();
   return (
     <nav className='flex justify-around shadow-md mb-3'>
       <a href='/'>HOME</a>
@@ -11,7 +16,9 @@ export default function Nav() {
       <a href='/photos'>PHOTOS</a>
       <a href='/books'>BOOKS</a>
       <a href='/about'>ABOUT</a>
-      <a href='/api/auth/signin'>SIGNIN</a>
+      <SessionProvider session={session}>
+        <SignInOut />
+      </SessionProvider>
     </nav>
   );
 }

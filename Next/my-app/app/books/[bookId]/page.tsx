@@ -13,7 +13,7 @@ export default async function Book({
   //   const book = (await fetch(`http://localhost:3000/api/books/${bookId}`).then(
   //     (res) => res.json()
   //   )) as TBook;
-  const book = getBook(+bookId);
+  const book = await getBook(+bookId);
   if (!book) return NotFoundBook();
 
   return (

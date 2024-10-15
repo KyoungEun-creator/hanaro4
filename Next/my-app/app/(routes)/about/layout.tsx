@@ -8,7 +8,7 @@ export default async function AboutLayout({
   children: React.ReactNode;
 }>) {
   const session = await auth();
-  console.log('🚀   session:', session);
+  // console.log('🚀   session:', session);
 
   return (
     <>
@@ -20,7 +20,7 @@ export default async function AboutLayout({
         <h1 className='text-2xl'>About Layout: {session?.user?.name}</h1>
         <Suspense fallback={<h1>...loading</h1>}>{children}</Suspense>
         {session?.user ? (
-          <Link href={'/api/auth/signout'}>Logout</Link>
+          <Link href={'/api/auth/signout?callbackUrl=/'}>Logout</Link>
         ) : (
           <Link href={'/api/auth/signin'}>Login</Link>
         )}
