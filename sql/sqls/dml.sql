@@ -1,3 +1,5 @@
+
+
 select * from Major;
 update Major set name = '소프트웨어학과' where id = 4;
 select * from Major limit 3, 2;
@@ -50,3 +52,5 @@ select * from Major where id <= 3
 UNION ALL
 select * from Major where id > 3;
 
+-- 평균 급여보다 높은 부서명과 그 부서의 최고 연봉자 구하기
+select max(salary) from Emp;

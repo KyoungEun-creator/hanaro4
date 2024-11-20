@@ -33,10 +33,23 @@ create table Major (
 
 create table Prof (
 	id smallint unsigned not null AUTO_INCREMENT comment '교수번호',
+    createdate timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '등록일시',
+    updatedate timestamp DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '수정일시',
     name varchar(31) not null comment '교수명',
     likecnt int default 0,
     PRIMARY KEY (id)
 );
+
+select * from Prof;
+desc Prof;
+insert into Prof(name) values ('김교수');
+insert into Prof(name) values ('박교수');
+insert into Prof(name) values ('최교수');
+insert into Prof(name) values ('홍교수');
+
+select * from Subject;
+insert into Subject(name, prof) 
+select concat(p.name, '과목'), p.id from Prof p;
 
 alter table Prof add column createdate timestamp DEFAULT CURRENT_TIMESTAMP COMMENT '등록일시' after id;
 alter table Prof add column updatedate timestamp DEFAULT CURRENT_TIMESTAMP 
@@ -72,5 +85,18 @@ create table Enroll (
              References Student(id) on Delete cascade on Update cascade
 );
 
+select * from Enroll;
+desc Enroll;
 
--- drop table Enroll;desc Prof
+select * from Student; -- 1, 2, 4
+select * from Subject; -- 1, 2, 3, 4
+
+insert into Enroll(subject, student) values (1, 1), (2, 2), (3, 4), (4, 4);
+select * from Enroll;
+
+-- 수강신청한 과목명, 학생명, 전공과 함께 출력
+select e.*, sub.name as subjectName, stu.name studentName, m.name as studentMajor
+	from Enroll e inner join Subject sub on e.subject = sub.id
+						  inner join Student stu on e.student = stu.id
+						  left outer join Major m on stu.major = m.id;
+                          

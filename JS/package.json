@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/KyoungEun-creator/hanaro4#readme",
   "dependencies": {
+    "express": "^4.21.1",
     "moment": "^2.30.1"
   }
 }
